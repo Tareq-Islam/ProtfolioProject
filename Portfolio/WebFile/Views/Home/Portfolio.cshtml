@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CML.CategoryModel>
+@{
+    ViewBag.Title = "Portfolio";
+    ViewBag.Portfolio = "active";
+}
+
+<div class="first-widget parallax" id="portfolio">
+    <div class="parallax-overlay">
+        <div class="container pageTitle">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <h2 class="page-title">Our Portfolio</h2>
+                </div> <!-- /.col-md-6 -->
+                <div class="col-md-6 col-sm-6 text-right">
+                    <span class="page-location">Home / Portfolio</span>
+                </div> <!-- /.col-md-6 -->
+            </div> <!-- /.row -->
+        </div> <!-- /.container -->
+    </div> <!-- /.parallax-overlay -->
+</div> <!-- /.pageTitle -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <ul id="filters" class="mixitup-controls">
+                <li class="filter" data-filter="all">All</li>
+                @foreach (var item in ViewBag.Categories)
+                {
+                    if (item.IsActive != false)
+                    {
+                    <li class="filter" data-filter="@item.CatName">@item.CatName</li>
+                    }
+                }
+                @*@Html.ActionLink("All", "AllCategory", "Home", new { }, new { })*@
+
+                @*<li class="filter" data-filter="branding">Branding</li>
+                <li class="filter" data-filter="illustration">Illustration</li>
+                <li class="filter" data-filter="business">Business</li>
+                <li class="filter" data-filter="identity">Identity</li>*@
+            </ul>
+        </div> <!-- /.col-md-12 -->
+    </div> <!-- /.row -->
+</div> <!-- /.container -->
+@*Render partial*@
+@Html.Partial("_portfolioViewPartial")

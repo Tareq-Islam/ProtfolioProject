@@ -1,0 +1,56 @@
+﻿
+@using Microsoft.AspNet.Identity
+@{
+    string userUper=string.Empty;
+    string url = Url.Action("Login", "Account", new { area = "" });
+    if (User.Identity.GetUserName().Length != 0)
+    {
+        var email = User.Identity.GetUserName();
+        string user = email.Substring(0, email.IndexOf("@", StringComparison.Ordinal));
+        userUper = user.ToUpper();
+    }
+    else
+    {
+        Server.TransferRequest(url);
+    }
+
+}
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "" }))
+    {
+    @Html.AntiForgeryToken()
+
+
+        <li class="nav-item dropdown navbar-dark">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-fw fa-user-circle"></i>
+                <span class="nav-link-text ">@(userUper)</span>
+            </a>
+            <div class="dropdown-menu bg-dark">
+                <a class="nav-link dropdown-item text-info" href="@Url.Action("Index", "Manage", new { area = "" })">
+                    <i class="fa fa-fw fa-cog"></i>
+                    <span class="nav-link-text">Settings</span>
+                </a>
+                <a class="nav-link dropdown-item text-info" href="javascript:document.getElementById('logoutForm').submit()">
+                    <i class="fa fa-fw fa-sign-out"></i>
+                    <span class="nav-link-text">Logout</span>
+                </a>
+              
+            </div>
+            
+            
+
+        </li>
+
+
+    
+    }
+}
+else
+{
+    <ul class="nav navbar-nav">
+        @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

@@ -1,0 +1,141 @@
+﻿@model WebFile.Models.ContactViewModel
+
+@{
+    ViewBag.Title = "Contact";
+    ViewBag.Contact = "active";
+}
+<div class="first-widget parallax" id="contact">
+    <div class="parallax-overlay">
+        <div class="container pageTitle">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <h2 class="page-title">Contact</h2>
+                </div> <!-- /.col-md-6 -->
+                <div class="col-md-6 col-sm-6 text-right">
+                    <span class="page-location">Home / Contact</span>
+                </div> <!-- /.col-md-6 -->
+            </div> <!-- /.row -->
+        </div> <!-- /.container -->
+    </div> <!-- /.parallax-overlay -->
+</div> <!-- /.pageTitle -->
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="contact-form">
+
+                        <div class="widget-inner">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="form-horizontal">
+                                    <h4>Contact US</h4>
+                                    <hr />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+
+                                        <div class="col-md-12">
+                                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <div class="col-md-12">
+                                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <div class="col-md-12">
+                                            @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <div class="col-md-12">
+                                            @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label" })
+                                            @Html.TextAreaFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <input class="mainBtn" id="submit" type="submit" name="submit" value="Send Message" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                            }
+
+                        </div> <!-- /.widget-inner -->
+                    </div> <!-- /.contact-form -->
+                </div> <!-- /.col-md-12 -->
+                <div class="col-md-6">
+                    <div class="contact-wrapper">
+
+                        <div class="contact-map">
+                            <div class="google-map-canvas" id="map-canvas" style="height: 320px;">
+                            </div>
+                        </div>
+                    </div> <!-- /.contact-wrapper -->
+                </div> <!-- /.col-md-12 -->
+
+
+            </div> <!-- /.row -->
+
+
+        </div> <!-- /.col-md-6 -->
+
+    </div> <!-- /.row -->
+
+</div> <!-- /.container -->
+
+
+<script>
+    $(document).ready(function () {
+        getLocation();
+    });
+
+    function getLocation() {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (pos) {
+
+                var latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+                var container = document.getElementById("map-canvas");
+                var gmap = new google.maps.Map(container, { zoom: 13, center: latlng });
+                var marker = new google.maps.Marker({ position: latlng, map: gmap, title: "I am here!" });
+
+
+            }, function (err) { });
+        }
+
+
+
+
+        // if (supportsGeolocation()) {
+        //     watchId = navigator.geolocation.getCurrentPosition(showPosition, showError);
+        // } else {
+        //     showMessage("Geolocation is not supported by this browser.");
+        // }
+    }
+    </script>

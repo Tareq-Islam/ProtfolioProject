@@ -1,0 +1,81 @@
+﻿@model WebFile.Models.RegisterViewModel
+@{
+    Layout = null;
+    ViewBag.Title = "Register";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Tareq - Portfolio</title>
+    <!-- Bootstrap core CSS-->
+    <link href="/Content/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="/Content/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="/Content/Admincss/sb-admin.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark">
+    <div class="container">
+        <div class="card card-register mx-auto mt-5">
+            <div class="card-header text-center">Register an Account</div>
+            <div class="card-body">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new {@for="inputEmail"})
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id= "inputEmail", @type="text", @placeholder = "Enter your mail" })
+                </div>
+                <div class="form-group">
+                    
+                            @Html.LabelFor(m => m.Password, new { @for="Password" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @id = "Password", @type = "password", @placeholder = "Password" })
+                            
+                      
+                      
+                </div>
+                <div class="form-group">
+                   
+                     
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @for = "ConfirmPassword" })
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @id = "ConfirmPassword", @type = "password", @placeholder = "Confirm password" })
+
+               
+                   
+                </div>
+                <div class="text-center">
+                    <input type="submit" class="btn btn-success btn-block"  value="Register" />
+                </div>
+
+
+            } <br />
+                <div class="text-center">
+                    <a class="text-info" href="@Url.Action("Login")">Login Page</a>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="/Scripts/Adminjs/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/Scripts/Adminjs/jquery.easing.min.js"></script>
+</body>
+
+</html>
+
+
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

@@ -1,0 +1,91 @@
+﻿@model IEnumerable<CML.CategoryProductMediaRModel>
+
+@{
+    ViewBag.Title = "Product";
+}
+
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fa fa-wrench"></i>&nbsp; Project Data List Panel
+    </div>
+    <div class="card-body">
+        <div>@Html.ActionLink("Create", "Create", new { }, new { @class = "btn btn-success btn-ms" })</div>
+        <br />
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover w-100" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProductName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CategoryName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>
+        
+                        <th>
+                            @Html.DisplayNameFor(model => model.DisplayOrder)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsActive)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsDefault)
+                        </th>
+
+
+                        <th></th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CategoryName)
+                            </td>
+       
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+        
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DisplayOrder)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsActive)
+                            </td>
+       
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsDefault)
+                            </td>
+
+
+                            <td colspan="2">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink("Details", "Details", new { id = item.ProductId }, new { @class = "btn btn-info btn-sm" })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ProductId }, new { @class = "btn btn-danger btn-sm" })
+                            </td>
+                        </tr>
+                    }
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>
+
+

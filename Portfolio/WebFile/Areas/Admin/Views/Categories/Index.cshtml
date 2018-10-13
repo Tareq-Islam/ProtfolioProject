@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CML.CategoryModel>
+
+@{
+    ViewBag.Title = "Category";
+}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fa fa-user"></i>&nbsp; User Data List
+    </div>
+    <div class="card-body">
+        <div>@Html.ActionLink("Create", "Create", new { }, new { @class = "btn btn-success btn-lg" })</div>
+        <br />
+
+        <div class="table-responsive">
+            <table class="table table-bordered w-100" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CatName)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.DisplayOrder)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsActive)
+                        </th>
+
+                        <th></th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CatName)
+                            </td>
+        
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DisplayOrder)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsActive)
+                            </td>
+
+                            <td colspan="2">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink("Details", "Details", new { id = item.CategoryId }, new { @class = "btn btn-info btn-sm" })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId}, new { @class = "btn btn-danger btn-sm" })
+                            </td>
+                        </tr>
+                    }
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>
+

@@ -1,0 +1,80 @@
+﻿@model CML.CategoryProductMediaRModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fa fa-sitemap"></i> &nbsp; Category Details Panel
+    </div>
+    <div class="card-body">
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.ProductId)</td>
+                    <td>@Html.DisplayFor(model => model.ProductId)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.ProductName)</td>
+                    <td>@Html.DisplayFor(model => model.ProductName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.CategoryName)</td>
+                    <td>@Html.DisplayFor(model => model.CategoryName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Description)</td>
+                    <td>@Html.DisplayFor(model => model.Description)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.ProductFeature)</td>
+                    <td>@Html.DisplayFor(model => model.ProductFeature)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.DisplayOrder)</td>
+                    <td>@Html.DisplayFor(model => model.DisplayOrder)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.IsActive)</td>
+                    <td>@Html.DisplayFor(model => model.IsActive)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.IsDefault)</td>
+                    <td>@Html.DisplayFor(model => model.IsDefault)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.IsThumbnail)</td>
+                    <td>@Html.DisplayFor(model => model.IsThumbnail)</td>
+                </tr>
+
+
+            </table>
+
+            <div>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }, new { @class = "btn btn-primary btn-sm" })
+                @Html.ActionLink("Delete", "Delete", new { id = Model.ProductId }, new { @class = "btn btn-danger btn-sm" })
+                @Html.ActionLink("Back", "Index", new { }, new { @class = "btn btn-info btn-sm" })
+            </div>
+
+        </div>
+    </div>
+    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>
+
+
+
+   
+           
+
+            
+
+            
+
+            
+
+            
+
+            
+

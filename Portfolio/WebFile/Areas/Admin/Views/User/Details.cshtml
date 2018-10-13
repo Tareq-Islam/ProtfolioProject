@@ -1,0 +1,53 @@
+﻿@model WebFile.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Details";
+    var email = Model.UserName;
+    string user = email.Substring(0, email.IndexOf("@", StringComparison.Ordinal));
+    string userUper = user.ToUpper();
+}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fa fa-user"></i> &nbsp; @userUper Details Panel
+    </div>
+    <div class="card-body">
+        
+      <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Email)</td>
+                    <td>@Html.DisplayFor(model => model.Email)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.UserName)</td>
+                    <td>@Html.DisplayFor(model => model.UserName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.PhoneNumber)</td>
+                    <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.LockoutEnabled)</td>
+                    <td>@Html.DisplayFor(model => model.LockoutEnabled)</td>
+                </tr>
+
+
+                      
+            </table>
+        
+              <div>
+              @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-xs" })
+              @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
+              @Html.ActionLink("Back", "Index", new { }, new { @class = "btn btn-info btn-xs" })
+          </div>
+    
+        </div>
+    </div>
+    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>
+
+    
+        
+
+      

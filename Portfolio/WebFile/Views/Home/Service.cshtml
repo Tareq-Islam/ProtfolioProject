@@ -1,0 +1,161 @@
+﻿@{
+    ViewBag.Title = "Service";
+    ViewBag.Service = "active";
+}
+
+<style class="cp-pen-styles">
+
+    .flex-container-services {
+        padding: 0;
+        margin: auto;
+        list-style: none;
+        max-width: 1130px;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: row wrap;
+        justify-content: center;
+    }
+
+    .flex-item-services {
+        /*background: #f1f1f1;*/
+        padding: 0px;
+        width: 340px;
+        height: 100px;
+        margin: 10px 16px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .title-services {
+        word-break: normal;
+        font-size: 18px;
+        padding: 0 10px 5px;
+        color: #333;
+        text-align: left;
+    }
+
+    .content-services {
+        font-size: 16px;
+        padding: 0 10px;
+        color: #666;
+        text-align: left;
+    }
+
+    .service-description {
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 22px;
+        margin-bottom: 25px;
+        color: #808080;
+    }
+
+    .separation-title {
+        width: 100%;
+        display: block;
+        margin-top: 30px;
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    .services-icon {
+        float: left;
+        overflow: hidden;
+        font-size: 30px;
+        margin: -12px 15px 100px 0;
+    }
+</style>
+<div class="first-widget parallax" id="contact">
+    <div class="parallax-overlay">
+        <div class="container pageTitle">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <h2 class="page-title">Our Service</h2>
+                </div> <!-- /.col-md-6 -->
+                <div class="col-md-6 col-sm-6 text-right">
+                    <span class="page-location">Home / Service</span>
+                </div> <!-- /.col-md-6 -->
+            </div> <!-- /.row -->
+        </div> <!-- /.container -->
+    </div> <!-- /.parallax-overlay -->
+</div> <!-- /.pageTitle -->
+<div class="flex-container-services">
+    <h2 class="separation-title"> Website Development </h2>
+    <div class="service-description">Creating a website that speaks to your targeted audience is the best way to convert visits into sales. </div>
+    <!-- start of Web dev container -->
+    <div class="flex-item-services">
+        <figure class=services-icon>
+            <i style="color: #f3701e" class="fa fa-paint-brush" aria-hidden="true"></i>
+        </figure>
+        <div class="title-services"> Design and Development </div>
+        <div class="content-services"> Create a beautiful, functional site that speaks to your clients. From scratch. </div>
+    </div>
+    <div class="flex-item-services">
+        <figure class=services-icon>
+            <i style="color: #f3701e" class="fa fa-shopping-cart" aria-hidden="true"></i>
+        </figure>
+        <div class="title-services"> E-Commerce </div>
+        <div class="content-services"> Increase revenue by bringing your business online. Offer and sell your products directly on your site. </div>
+    </div>
+    <div class="flex-item-services">
+        <figure class=services-icon>
+            <i style="color: #f3701e" class="fa fa-line-chart" aria-hidden="true"></i>
+        </figure>
+        <div class="title-services"> Rank Higher in Search Results </div>
+        <div class="content-services"> With the best SEO practices, your site will show at the top of search engines results. </div>
+    </div>
+    <!-- end of Web dev container -->
+    <h2 class="separation-title"> Marketing </h2>
+    <div class="service-description">Having and managing a correct marketing strategy is crucial in a fast moving market. </div>
+    <!-- start of Marketing -->
+    <div class="flex-item-services">
+        <figure class=services-icon>
+            <i style="color: #f3701e" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        </figure>
+        <div class="title-services"> Content Creation </div>
+        <div class="content-services"> From original and data oriented blog posts to social profiles and product descriptions. </div>
+    </div>
+    <div class="flex-item-services">
+        <figure class=services-icon>
+            <i style="color: #f3701e" class="fa fa-comments" aria-hidden="true"></i>
+        </figure>
+        <div class="title-services"> Increased Visibility </div>
+        <div class="content-services"> Get people talking about you. Implement marketing campaigns, Ads management and strategy.  </div>
+    </div>
+    <div class="flex-item-services">
+        <figure class=services-icon>
+            <i style="color: #f3701e" class="fa fa fa-puzzle-piece" aria-hidden="true"></i>
+        </figure>
+        <div class="title-services"> Audits </div>
+        <div class="content-services"> A strategy can always be improved. We'll make the best out of yours. </div>
+    </div>
+    <!-- end of Marketing container -->
+    <h2 class="separation-title"> Social Media </h2>
+    <div class="service-description"> What a better place to connect with your audience and give a great name to your brand? </div>
+    <!-- start of Social media container -->
+    <div class="flex-item-services">
+        <figure class=services-icon>
+            <i style="color: #f3701e" class="fa fa-users" aria-hidden="true"></i>
+        </figure>
+        <div class="title-services"> Community Management </div>
+        <div class="content-services"> Keeping customers happy and engaged with your brand. </div>
+    </div>
+    <div class="flex-item-services">
+        <figure class=services-icon>
+            <i style="color: #f3701e" class="fa fa-bullhorn" aria-hidden="true"></i>
+        </figure>
+        <div class="title-services"> Contests and Promotions </div>
+        <div class="content-services"> Reaching potential customers the right way. </div>
+    </div>
+    <div class="flex-item-services">
+        <figure class=services-icon>
+            <i style="color: #f3701e" class="fa fa-plus-circle"></i>
+        </figure>
+        <div class="title-services"> Customer Support </div>
+        <div class="content-services"> Making sure that all queries and doubts are handled. </div>
+    </div>
+    <!-- end of Social Media container -->
+</div>

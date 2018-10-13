@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="DisplayOrder" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="CategoryMGRef">
+          <Key>
+            <PropertyRef Name="CategoryMGRefID" />
+          </Key>
+          <Property Name="CategoryMGRefID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkMGID" Type="bigint" Nullable="false" />
+          <Property Name="fkCategoryID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MediaGallery">
+          <Key>
+            <PropertyRef Name="MGID" />
+          </Key>
+          <Property Name="MGID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkParentMGID" Type="bigint" />
+          <Property Name="Caption" Type="varchar" MaxLength="250" />
+          <Property Name="FilePathOrLink" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ShortDetails" Type="varchar" MaxLength="250" />
+          <Property Name="IsDefault" Type="bit" />
+          <Property Name="IsThumbnail" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkCategoryID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="ProductFeature" Type="varchar" MaxLength="250" />
+          <Property Name="DisplayOrder" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="ProductMGRef">
+          <Key>
+            <PropertyRef Name="ProductMGRefID" />
+          </Key>
+          <Property Name="ProductMGRefID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkMGID" Type="bigint" Nullable="false" />
+          <Property Name="fkProductID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CategoryMGRef_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="CategoryMGRef" Type="Self.CategoryMGRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="CategoryMGRef">
+              <PropertyRef Name="fkCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryMGRef_MediaGallery">
+          <End Role="MediaGallery" Type="Self.MediaGallery" Multiplicity="1" />
+          <End Role="CategoryMGRef" Type="Self.CategoryMGRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaGallery">
+              <PropertyRef Name="MGID" />
+            </Principal>
+            <Dependent Role="CategoryMGRef">
+              <PropertyRef Name="fkMGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Product">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="fkCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductMGRef_MediaGallery1">
+          <End Role="MediaGallery" Type="Self.MediaGallery" Multiplicity="1" />
+          <End Role="ProductMGRef" Type="Self.ProductMGRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaGallery">
+              <PropertyRef Name="MGID" />
+            </Principal>
+            <Dependent Role="ProductMGRef">
+              <PropertyRef Name="fkMGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductMGRef_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductMGRef" Type="Self.ProductMGRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductMGRef">
+              <PropertyRef Name="fkProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryMGRef" EntityType="Self.CategoryMGRef" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MediaGallery" EntityType="Self.MediaGallery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductMGRef" EntityType="Self.ProductMGRef" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CategoryMGRef_Category" Association="Self.FK_CategoryMGRef_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="CategoryMGRef" EntitySet="CategoryMGRef" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryMGRef_MediaGallery" Association="Self.FK_CategoryMGRef_MediaGallery">
+            <End Role="MediaGallery" EntitySet="MediaGallery" />
+            <End Role="CategoryMGRef" EntitySet="CategoryMGRef" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Product" Association="Self.FK_Product_Product">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductMGRef_MediaGallery1" Association="Self.FK_ProductMGRef_MediaGallery1">
+            <End Role="MediaGallery" EntitySet="MediaGallery" />
+            <End Role="ProductMGRef" EntitySet="ProductMGRef" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductMGRef_Product" Association="Self.FK_ProductMGRef_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductMGRef" EntitySet="ProductMGRef" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="portfolioEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="Model.Category" />
+          <EntitySet Name="CategoryMGRef" EntityType="Model.CategoryMGRef" />
+          <EntitySet Name="MediaGallery" EntityType="Model.MediaGallery" />
+          <EntitySet Name="Product" EntityType="Model.Product" />
+          <EntitySet Name="ProductMGRef" EntityType="Model.ProductMGRef" />
+          <AssociationSet Name="FK_CategoryMGRef_Category" Association="Model.FK_CategoryMGRef_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="CategoryMGRef" EntitySet="CategoryMGRef" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Product" Association="Model.FK_Product_Product">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoryMGRef_MediaGallery" Association="Model.FK_CategoryMGRef_MediaGallery">
+            <End Role="MediaGallery" EntitySet="MediaGallery" />
+            <End Role="CategoryMGRef" EntitySet="CategoryMGRef" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductMGRef_MediaGallery1" Association="Model.FK_ProductMGRef_MediaGallery1">
+            <End Role="MediaGallery" EntitySet="MediaGallery" />
+            <End Role="ProductMGRef" EntitySet="ProductMGRef" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductMGRef_Product" Association="Model.FK_ProductMGRef_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductMGRef" EntitySet="ProductMGRef" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="CategoryMGRef" Relationship="Model.FK_CategoryMGRef_Category" FromRole="Category" ToRole="CategoryMGRef" />
+          <NavigationProperty Name="Product" Relationship="Model.FK_Product_Product" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="CategoryMGRef">
+          <Key>
+            <PropertyRef Name="CategoryMGRefID" />
+          </Key>
+          <Property Name="CategoryMGRefID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkMGID" Type="Int64" Nullable="false" />
+          <Property Name="fkCategoryID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Model.FK_CategoryMGRef_Category" FromRole="CategoryMGRef" ToRole="Category" />
+          <NavigationProperty Name="MediaGallery" Relationship="Model.FK_CategoryMGRef_MediaGallery" FromRole="CategoryMGRef" ToRole="MediaGallery" />
+        </EntityType>
+        <EntityType Name="MediaGallery">
+          <Key>
+            <PropertyRef Name="MGID" />
+          </Key>
+          <Property Name="MGID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkParentMGID" Type="Int64" />
+          <Property Name="Caption" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FilePathOrLink" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ShortDetails" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IsDefault" Type="Boolean" />
+          <Property Name="IsThumbnail" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="CategoryMGRef" Relationship="Model.FK_CategoryMGRef_MediaGallery" FromRole="MediaGallery" ToRole="CategoryMGRef" />
+          <NavigationProperty Name="ProductMGRef" Relationship="Model.FK_ProductMGRef_MediaGallery1" FromRole="MediaGallery" ToRole="ProductMGRef" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkCategoryID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProductFeature" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Category" Relationship="Model.FK_Product_Product" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="ProductMGRef" Relationship="Model.FK_ProductMGRef_Product" FromRole="Product" ToRole="ProductMGRef" />
+        </EntityType>
+        <EntityType Name="ProductMGRef">
+          <Key>
+            <PropertyRef Name="ProductMGRefID" />
+          </Key>
+          <Property Name="ProductMGRefID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkMGID" Type="Int64" Nullable="false" />
+          <Property Name="fkProductID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="MediaGallery" Relationship="Model.FK_ProductMGRef_MediaGallery1" FromRole="ProductMGRef" ToRole="MediaGallery" />
+          <NavigationProperty Name="Product" Relationship="Model.FK_ProductMGRef_Product" FromRole="ProductMGRef" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_CategoryMGRef_Category">
+          <End Type="Model.Category" Role="Category" Multiplicity="1" />
+          <End Type="Model.CategoryMGRef" Role="CategoryMGRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="CategoryMGRef">
+              <PropertyRef Name="fkCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Product">
+          <End Type="Model.Category" Role="Category" Multiplicity="1" />
+          <End Type="Model.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="fkCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoryMGRef_MediaGallery">
+          <End Type="Model.MediaGallery" Role="MediaGallery" Multiplicity="1" />
+          <End Type="Model.CategoryMGRef" Role="CategoryMGRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaGallery">
+              <PropertyRef Name="MGID" />
+            </Principal>
+            <Dependent Role="CategoryMGRef">
+              <PropertyRef Name="fkMGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductMGRef_MediaGallery1">
+          <End Type="Model.MediaGallery" Role="MediaGallery" Multiplicity="1" />
+          <End Type="Model.ProductMGRef" Role="ProductMGRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaGallery">
+              <PropertyRef Name="MGID" />
+            </Principal>
+            <Dependent Role="ProductMGRef">
+              <PropertyRef Name="fkMGID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductMGRef_Product">
+          <End Type="Model.Product" Role="Product" Multiplicity="1" />
+          <End Type="Model.ProductMGRef" Role="ProductMGRef" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductMGRef">
+              <PropertyRef Name="fkProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="portfolioEntity">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="CatName" ColumnName="CatName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryMGRef">
+            <EntityTypeMapping TypeName="Model.CategoryMGRef">
+              <MappingFragment StoreEntitySet="CategoryMGRef">
+                <ScalarProperty Name="fkCategoryID" ColumnName="fkCategoryID" />
+                <ScalarProperty Name="fkMGID" ColumnName="fkMGID" />
+                <ScalarProperty Name="CategoryMGRefID" ColumnName="CategoryMGRefID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MediaGallery">
+            <EntityTypeMapping TypeName="Model.MediaGallery">
+              <MappingFragment StoreEntitySet="MediaGallery">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsThumbnail" ColumnName="IsThumbnail" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="ShortDetails" ColumnName="ShortDetails" />
+                <ScalarProperty Name="FilePathOrLink" ColumnName="FilePathOrLink" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="fkParentMGID" ColumnName="fkParentMGID" />
+                <ScalarProperty Name="MGID" ColumnName="MGID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="Model.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="ProductFeature" ColumnName="ProductFeature" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="fkCategoryID" ColumnName="fkCategoryID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductMGRef">
+            <EntityTypeMapping TypeName="Model.ProductMGRef">
+              <MappingFragment StoreEntitySet="ProductMGRef">
+                <ScalarProperty Name="fkProductID" ColumnName="fkProductID" />
+                <ScalarProperty Name="fkMGID" ColumnName="fkMGID" />
+                <ScalarProperty Name="ProductMGRefID" ColumnName="ProductMGRefID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
